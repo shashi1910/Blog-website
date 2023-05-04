@@ -17,10 +17,14 @@ app.get("/editor", (req, res) => {
   res.sendFile(path.join(initial_path, "editor.html"));
 });
 
+//Error in this, needs debugging
+
 app.post("/upload", (req, res) => {
-  let file = req.file.image;
+  let file = req.files.image;
   let date = new Date();
-  let imagename = date.getData() + date.getTime() + file.name;
+
+  let imagename = date.getDate() + date.getTime() + file.name;
+
   let path = "public/uploads/" + imagename;
 
   file.mv(path, (err, result) => {
